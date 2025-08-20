@@ -1,0 +1,35 @@
+class Customer {
+    attribute name
+    attribute address
+}
+
+class Restaurant {
+    attribute name
+    attribute location
+}
+
+class DeliveryBoy {
+    attribute name
+    attribute phone
+}
+
+class Order {
+    has Customer
+    has Restaurant
+    has DeliveryBoy
+
+    method showDetails() {
+        print "Customer: " + Customer.name + ", Address: " + Customer.address
+        print "Restaurant: " + Restaurant.name + ", Location: " + Restaurant.location
+        print "DeliveryBoy: " + DeliveryBoy.name + ", Phone: " + DeliveryBoy.phone
+    }
+}
+
+main {
+    create customer = new Customer("Rahul", "Sector 10")
+    create restaurant = new Restaurant("Foodie Hub", "Downtown")
+    create deliveryBoy = new DeliveryBoy("Amit", "9876543210")
+
+    create order = new Order(customer, restaurant, deliveryBoy)
+    order.showDetails()
+}

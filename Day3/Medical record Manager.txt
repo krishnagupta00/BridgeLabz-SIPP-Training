@@ -1,0 +1,53 @@
+interface Searchable {
+    method search(keyword)
+}
+
+interface Printable {
+    method print()
+}
+
+class LabReport implements Searchable, Printable {
+    attribute reportId
+    attribute patientName
+    attribute testType
+
+    method search(keyword) {
+        if patientName contains keyword OR testType contains keyword
+            return true
+        else
+            return false
+    }
+
+    method print() {
+        print "Lab Report: " + reportId + ", Patient: " + patientName + ", Test: " + testType
+    }
+}
+
+class Prescription implements Searchable, Printable {
+    attribute prescriptionId
+    attribute patientName
+    attribute medicineList
+
+    method search(keyword) {
+        if patientName contains keyword OR medicineList contains keyword
+            return true
+        else
+            return false
+    }
+
+    method print() {
+        print "Prescription: " + prescriptionId + ", Patient: " + patientName + ", Medicines: " + medicineList
+    }
+}
+
+main {
+    create record1 = new LabReport("R101", "Arjun", "Blood Test")
+    create record2 = new Prescription("P201", "Arjun", ["Paracetamol", "Vitamin C"])
+
+    list records = [record1, record2]
+
+    for each record in records {
+        if record.search("Arjun") == true
+            record.print()
+    }
+}

@@ -1,0 +1,61 @@
+interface PaymentMethod { }
+
+class UPI implements PaymentMethod {
+    attribute upiId
+    constructor(upiId)
+}
+
+class Card implements PaymentMethod {
+    attribute cardNumber
+    attribute expiryMonth
+    attribute expiryYear
+    constructor(cardNumber, expiryMonth, expiryYear)
+}
+
+class NetBanking implements PaymentMethod {
+    attribute bankName
+    attribute accountId
+    constructor(bankName, accountId)
+}
+
+class Transaction<T extends PaymentMethod> {
+    attribute id
+    attribute amount
+    attribute method : T
+
+    constructor(id, amount, method : T)
+
+    method validate() : boolean {
+        if method is UPI        -> return method.upiId is not empty
+        if method is Card       -> return cardNumber length valid AND expiry valid
+        if method is NetBanking -> return bankName not empty AND accountId not empty
+        return false
+    }
+
+    method process() : string {
+        if validate() == false -> return "FAILED"
+        if method is UPI        -> return "SUCCESS_UPI"
+        if method is Card       -> return "SUCCESS_CARD"
+        if method is NetBanking -> return "SUCCESS_NETBANKING"
+    }
+
+    method getMethod() : T { return method }
+}
+
+class PaymentProcessor {
+    method submit(tx : Transaction<? extends PaymentMethod>) : string {
+        return tx.process()
+    }
+}
+
+main {
+    upiTx  = new Transaction<UPI>("TXN1", 999.00, new UPI("alice@okbank"))
+    cardTx = new Transaction<Card>("TXN2", 1500.00, new Card("4111-1111-1111-1111", 12, 2027))
+    nbTx   = new Transaction<NetBanking>("TXN3", 750.50, new NetBanking("HDFC", "ACC123"))
+
+    processor = new PaymentProcessor()
+
+    print processor.submit(upiTx)
+    print processor.submit(cardTx)
+    print processor.submit(nbTx)
+}

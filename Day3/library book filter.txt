@@ -1,0 +1,24 @@
+class Book {
+    attribute title
+    attribute year
+    attribute rating
+}
+
+main {
+    create list books
+
+    add Book("Java Basics", 2012, 4.2) to books
+    add Book("Modern Java", 2018, 4.8) to books
+    add Book("AI Fundamentals", 2021, 4.7) to books
+    add Book("Old Algorithms", 2010, 3.9) to books
+
+    // Use stream filter with lambda
+    result = books.stream()
+                  .filter(book -> book.year > 2015)
+                  .filter(book -> book.rating > 4.5)
+                  .collect(toList)
+
+    // Print result
+    for each book in result:
+        print book.title + " (" + book.year + ", Rating: " + book.rating + ")"
+}

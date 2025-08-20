@@ -1,0 +1,31 @@
+class Patient {
+    attribute id
+    attribute name
+    attribute age
+    attribute disease
+}
+
+main {
+    create HashMap patients  // key = patientID, value = Patient object
+
+    // Add patients
+    patient1 = new Patient(101, "Ravi", 30, "Fever")
+    patient2 = new Patient(102, "Anita", 45, "Diabetes")
+    patients.put(101, patient1)
+    patients.put(102, patient2)
+
+    // Retrieve patient
+    record = patients.get(101)
+    print "Patient Found: " + record.name + ", Disease: " + record.disease
+
+    // Update patient
+    record.disease = "Viral Fever"
+    patients.put(101, record)
+
+    // Delete patient
+    patients.remove(102)
+
+    // Display all patients
+    for each entry in patients
+        print entry.key + " -> " + entry.value.name + " (" + entry.value.disease + ")"
+}

@@ -1,0 +1,42 @@
+function solveMaze(maze, x, y, solution):
+    if x,y is the destination:
+        mark solution[x][y] = 1
+        return true
+
+    if isSafe(maze, x, y) == true:
+        if solution[x][y] == 1:
+            return false   // already visited
+
+        mark solution[x][y] = 1
+
+        // Move Down
+        if solveMaze(maze, x+1, y, solution) == true:
+            return true
+
+        // Move Right
+        if solveMaze(maze, x, y+1, solution) == true:
+            return true
+
+        // Move Up
+        if solveMaze(maze, x-1, y, solution) == true:
+            return true
+
+        // Move Left
+        if solveMaze(maze, x, y-1, solution) == true:
+            return true
+
+        // Backtrack
+        mark solution[x][y] = 0
+        return false
+
+    return false
+
+
+main:
+    maze = 2D grid (1 = path, 0 = wall)
+    solution = same size as maze, initialized to 0
+    if solveMaze(maze, startX, startY, solution) == true:
+        print "Path found"
+        print solution grid
+    else:
+        print "No path exists"
