@@ -1,0 +1,49 @@
+class Job {
+    attribute id
+    attribute deadline
+    attribute processingTime
+
+    constructor(id, deadline, processingTime)
+}
+
+class JobComparator {
+    method compare(job1, job2):
+        if job1.deadline != job2.deadline
+            return job1.deadline - job2.deadline
+        else
+            return job1.processingTime - job2.processingTime
+}
+
+class JobScheduler {
+    attribute priorityQueue
+
+    constructor() {
+        priorityQueue = new PriorityQueue(using JobComparator)
+    }
+
+    method addJob(job) {
+        priorityQueue.add(job)
+    }
+
+    method scheduleJobs() {
+        while priorityQueue not empty {
+            job = priorityQueue.remove()
+            print "Running Job: " + job.id + 
+                  " (Deadline: " + job.deadline + 
+                  ", Time: " + job.processingTime + ")"
+            wait job.processingTime
+            print "Job " + job.id + " completed"
+        }
+    }
+}
+
+main {
+    scheduler = new JobScheduler()
+
+    scheduler.addJob(new Job("J1", 5, 3))
+    scheduler.addJob(new Job("J2", 2, 1))
+    scheduler.addJob(new Job("J3", 3, 2))
+    scheduler.addJob(new Job("J4", 2, 4))
+
+    scheduler.scheduleJobs()
+}

@@ -1,0 +1,34 @@
+class Doctor {
+    attribute name
+    attribute specialization
+
+    constructor(name, specialization)
+}
+
+main {
+    departments = new Map<String, List<Doctor>>()
+
+    cardiologyList = new List<Doctor>()
+    cardiologyList.add(new Doctor("Dr. Mehta", "Cardiologist"))
+    cardiologyList.add(new Doctor("Dr. Kapoor", "Cardiologist"))
+    departments.put("Cardiology", cardiologyList)
+
+    neurologyList = new List<Doctor>()
+    neurologyList.add(new Doctor("Dr. Rao", "Neurologist"))
+    neurologyList.add(new Doctor("Dr. Singh", "NeuroSurgeon"))
+    departments.put("Neurology", neurologyList)
+
+    pediatricsList = new List<Doctor>()
+    pediatricsList.add(new Doctor("Dr. Sharma", "Pediatrician"))
+    departments.put("Pediatrics", pediatricsList)
+
+    specializationToFind = "Neurologist"
+
+    print "Doctors with specialization: " + specializationToFind
+    for each (dept, doctorList) in departments {
+        for each doctor in doctorList {
+            if doctor.specialization == specializationToFind
+                print doctor.name + " from " + dept
+        }
+    }
+}
