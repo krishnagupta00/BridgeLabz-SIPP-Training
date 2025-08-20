@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class HashMapExample {
+public class book-author {
 
     public static void insert(HashMap<String, String> map, String key, String value) {
         map.put(key, value);
@@ -16,6 +16,7 @@ public class HashMapExample {
         }
     }
 
+ public static void +y
     public static void main(String[] args) {
         HashMap<String, String> map = new HashMap<>();
 
