@@ -1,0 +1,59 @@
+class CircularTimer {
+    attribute slots[]   // array of time per question
+    attribute size
+    attribute front
+    attribute rear
+
+    constructor(n) {
+        size = n
+        slots = new int[size]
+        front = -1
+        rear = -1
+    }
+
+    method addSlot(time) {
+        if (rear + 1) % size == front
+            print "Slots full"
+        else if front == -1
+            front = 0
+            rear = 0
+            slots[rear] = time
+        else
+            rear = (rear + 1) % size
+            slots[rear] = time
+    }
+
+    method getNextSlot() {
+        if front == -1
+            return -1
+        time = slots[front]
+        if front == rear
+            front = -1
+            rear = -1
+        else
+            front = (front + 1) % size
+        return time
+    }
+}
+
+main {
+    timer = new CircularTimer(5)
+
+    timer.addSlot(30)   // Q1 -> 30 sec
+    timer.addSlot(45)   // Q2 -> 45 sec
+    timer.addSlot(60)   // Q3 -> 60 sec
+
+    while true {
+        t = timer.getNextSlot()
+        if t == -1
+            break
+
+        for i from t down to 1 {
+            print "Time left: " + i + " sec"
+            if i == 5
+                print "⚠ Warning: only 5 seconds left!"
+            wait 1 second
+        }
+        print "Time up for this question"
+    }
+}
