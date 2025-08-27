@@ -1,0 +1,32 @@
+CLASS Ticket
+    ATTRIBUTES: movieName, seatNumber, price, bookingStatus
+    METHOD displayTicketDetails()
+
+CLASS Theatre
+    ATTRIBUTES: movieSchedules, availableSeats, ticketsList
+    METHOD issueTicket(customer, movie, seat)
+        IF seat is available
+            CREATE Ticket object
+            Mark seat as booked
+            ADD Ticket to ticketsList
+            RETURN Ticket
+        ELSE
+            PRINT "Seat not available"
+    METHOD cancelTicket(ticket)
+        Mark ticket.bookingStatus = "Cancelled"
+        Free up seat in availableSeats
+
+CLASS Customer
+    ATTRIBUTES: name, bookedTickets
+    METHOD bookTicket(theatre, movie, seat)
+        ticket = theatre.issueTicket(self, movie, seat)
+        ADD ticket to bookedTickets
+    METHOD cancelTicket(theatre, ticket)
+        theatre.cancelTicket(ticket)
+        REMOVE ticket from bookedTickets
+
+MAIN:
+    CREATE theatre with schedule Avengers at 6PM
+    CREATE customer Ravi
+    CALL Ravi.bookTicket(theatre, "Avengers", "A12")
+    CALL Ravi.cancelTicket(theatre, ticket)

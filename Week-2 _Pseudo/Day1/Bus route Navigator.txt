@@ -1,0 +1,25 @@
+CLASS Node
+    ATTRIBUTES: stopName, next
+
+CLASS BusRoute
+    ATTRIBUTES: head
+    METHOD insertStop(afterStop, newStop)
+        FIND node with stopName = afterStop
+        CREATE newNode(newStop)
+        newNode.next = foundNode.next
+        foundNode.next = newNode
+
+    METHOD deleteStop(stopName)
+        TRAVERSE list until stopName found
+        REMOVE node by updating previous.next = current.next
+
+    METHOD searchStop(stopName)
+        TRAVERSE list
+        IF stopName found RETURN true
+        ELSE RETURN false
+
+MAIN:
+    Initialize route: Depot → Main Street → City Mall → Hospital → Airport
+    INSERT "University" after "City Mall"
+    DELETE "Hospital"
+    SEARCH "Airport"  // should return true
