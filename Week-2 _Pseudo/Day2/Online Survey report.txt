@@ -1,0 +1,20 @@
+CLASS SurveyResponse
+    ATTRIBUTES: restaurantName, rating
+
+METHOD averageRatings(responses):
+    map = EMPTY MAP<String, List<Integer>>
+
+    FOR each response in responses:
+        ADD response.rating to map[response.restaurantName]
+
+    result = EMPTY MAP<String, Double>
+    FOR each restaurant in map:
+        avg = SUM(map[restaurant]) / COUNT(map[restaurant])
+        result[restaurant] = avg
+
+    RETURN result
+
+MAIN:
+    responses = [("PizzaHut",4),("PizzaHut",5),("KFC",3),("KFC",4),("Subway",5),("Subway",4),("Subway",5)]
+    avgRatings = averageRatings(responses)
+    PRINT avgRatings

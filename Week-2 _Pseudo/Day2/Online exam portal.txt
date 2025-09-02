@@ -1,0 +1,26 @@
+CLASS User
+    ATTRIBUTES: username, password
+    METHOD login(inputUsername, inputPassword):
+        RETURN (inputUsername == username AND inputPassword == password)
+
+CLASS Student EXTENDS User
+    ATTRIBUTES: isRegistered, isEnrolled
+    METHOD login(inputUsername, inputPassword):
+        IF super.login(inputUsername, inputPassword) THEN
+            IF isRegistered AND isEnrolled THEN
+                PRINT "Student login successful. Show exams"
+            ELSE
+                PRINT "Student not registered or enrolled"
+        ELSE
+            PRINT "Invalid student credentials"
+
+CLASS Admin EXTENDS User
+    ATTRIBUTES: hasAdminPrivileges
+    METHOD login(inputUsername, inputPassword):
+        IF super.login(inputUsername, inputPassword) THEN
+            IF hasAdminPrivileges THEN
+                PRINT "Admin login successful. Show management tools"
+            ELSE
+                PRINT "Not authorized as Admin"
+        ELSE
+            PRINT "Invalid admin credentials"

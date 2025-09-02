@@ -1,0 +1,17 @@
+DEFINE attendance[30][30]  // 30 students × 30 days
+
+METHOD markAttendance(student, day, status):
+    attendance[student][day] = status   // 1 or 0
+
+METHOD dailySummary(day):
+    count = SUM over all students attendance[i][day]
+    PRINT "Students present:", count
+
+METHOD monthlySummary(student):
+    total = SUM over all days attendance[student][j]
+    PRINT "Total attendance:", total
+
+METHOD defaulterList():
+    FOR each student:
+        total = SUM row
+        IF total < 22 THEN PRINT "Student", student, "is defaulter"
