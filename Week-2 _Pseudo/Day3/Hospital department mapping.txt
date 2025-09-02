@@ -1,0 +1,15 @@
+CLASS Doctor
+    ATTRIBUTES: name, specialization, experienceYears
+    METHOD getDetails():
+        PRINT name, specialization, experienceYears
+
+MAIN:
+    departmentMap = Map<String, List<Doctor>>
+
+    ADD "Cardiology" → [Doctor("Dr. Mehta","Cardiologist",15), Doctor("Dr. Kapoor","Cardiologist",10)]
+    ADD "Neurology" → [Doctor("Dr. Sharma","Neurologist",10), Doctor("Dr. Das","Neurologist",8)]
+    ADD "Pediatrics" → [Doctor("Dr. Ritu","Pediatrician",12), Doctor("Dr. Anjali","Pediatrician",7)]
+
+    QUERY department = "Neurology"
+    FOR each doctor in departmentMap[department]:
+        PRINT doctor.getDetails()

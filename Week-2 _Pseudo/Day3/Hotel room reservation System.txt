@@ -1,0 +1,18 @@
+CLASS Room
+    ATTRIBUTES: roomNumber, customerName, daysStayed
+    METHOD calculateBill(): RETURN 0
+
+CLASS DeluxeRoom EXTENDS Room
+    METHOD calculateBill():
+        RETURN daysStayed * 3000
+
+CLASS SuiteRoom EXTENDS Room
+    METHOD calculateBill():
+        RETURN daysStayed * 5000
+
+MAIN:
+    customer1 = DeluxeRoom(101, "Ravi", 3)
+    PRINT "Invoice: ", customer1.customerName, customer1.calculateBill()
+
+    customer2 = SuiteRoom(202, "Anita", 2)
+    PRINT "Invoice: ", customer2.customerName, customer2.calculateBill()

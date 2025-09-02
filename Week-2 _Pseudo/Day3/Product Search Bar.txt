@@ -1,0 +1,17 @@
+FUNCTION binarySearch(catalog[], target):
+    left = 0
+    right = catalog.length - 1
+    WHILE left <= right:
+        mid = (left + right) / 2
+        IF catalog[mid] == target:
+            RETURN true
+        ELSE IF catalog[mid] < target:
+            left = mid + 1
+        ELSE:
+            right = mid - 1
+    RETURN false
+
+MAIN:
+    catalog = ["AirPods","Backpack","Camera","Laptop","Shoes","Smartphone","Watch"]
+    PRINT binarySearch(catalog, "Laptop")   // true
+    PRINT binarySearch(catalog, "Headphones") // false

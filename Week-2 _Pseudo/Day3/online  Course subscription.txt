@@ -1,0 +1,34 @@
+CLASS Course
+    ATTRIBUTES: title, duration, price
+    METHODS:
+        getDetails(): PRINT title, duration, price
+
+CLASS Student
+    ATTRIBUTES: name, email, enrolledCourses (List<Course>)
+    METHODS:
+        enrollCourse(course):
+            IF course NOT IN enrolledCourses THEN
+                ADD course to enrolledCourses
+                PRINT name, "enrolled in", course.title
+            ELSE
+                PRINT "Already enrolled in", course.title
+
+        viewEnrolledCourses():
+            PRINT name, "'s Enrolled Courses:"
+            FOR each course IN enrolledCourses:
+                PRINT course.title, course.duration, course.price
+
+MAIN:
+    course1 = Course("Java Programming Basics", "6 weeks", 4999)
+    course2 = Course("Data Structures in Java", "8 weeks", 5999)
+    course3 = Course("Spring Boot for Web Development", "10 weeks", 6999)
+
+    student1 = Student("Amit", "amit@email")
+    student1.enrollCourse(course1)
+    student1.enrollCourse(course2)
+    student1.viewEnrolledCourses()
+
+    student2 = Student("Priya", "priya@email")
+    student2.enrollCourse(course3)
+    student2.enrollCourse(course1)
+    student2.viewEnrolledCourses()
